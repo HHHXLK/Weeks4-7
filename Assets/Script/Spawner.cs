@@ -7,13 +7,17 @@ public class Spawner : MonoBehaviour
     public float waitDuration;
     public float destroyDuration;
 
+    public Color pacerColour;
+    public float pacerSpeed;
+
+
     private float waitProgress = 0f;
     private float destroyProgress = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Destroy(gameObject, destroyDuration);
+
 
         //EMPTY VECTOR3
         //Vector3 originPosition = Vector3.zero;
@@ -38,11 +42,26 @@ public class Spawner : MonoBehaviour
         {
             GameObject spawnedObject = Instantiate(spawningPrefab, transform.position, Quaternion.identity);
 
-            Destroy(spawnedObject, destroyDuration);
+            //TypeOfComponent variableName = variableOfObject.GetComponent<TypeOfComponent>();
+
+            Pacer spawnedPacer = spawnedObject.GetComponent<Pacer>();
+            spawnedPacer.speed = pacerSpeed;
+
+            //set the colour of our pacer spawner to be pacerColour
+            //SpriteRenderer of the pacer
+            SpriteRenderer spawnedRenderer = spawnedObject.GetComponent<SpriteRenderer>();
+            spawnedRenderer.color = pacerColour;
+
+            //Destroy(spawnedObject, destroyDuration);
 
             waitProgress = 0f;
         }
+    }
 
+    public void IncreasePacerSpeed()
+    {
+        pacerSpeed++;
+        //pacerSpeed += 1;
     }
 
 }
