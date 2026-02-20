@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class ContactSensor : MonoBehaviour
 {
-    public DungeonRaiderPlayer player;
+    public Transform player;
     public UnityEvent OnEnter;
     public UnityEvent OnLeave;
 
@@ -22,7 +22,7 @@ public class ContactSensor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isInTheHazard = hazardRenderer.bounds.Contains(player.transform.position);
+        bool isInTheHazard = hazardRenderer.bounds.Contains(player.position);
         if (isInTheHazard
             && wasInTheHazard == false)
         {
