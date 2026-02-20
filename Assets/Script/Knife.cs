@@ -2,27 +2,13 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
-    public bool isBad = false;
-    public Pirate pirate;
+    public PopUpPirateGame game;
 
     void OnMouseDown()
     {
-        if (pirate == null || pirate.gameOver) return;
-
-        if (isBad)
+        if (game != null)
         {
-            pirate.PopUp();  
-        }
-        else
-        {
-            Destroy(gameObject);  
-
-
-            Knife[] left = FindObjectsOfType<Knife>();
-            if (left.Length <= 1)
-            {
-                pirate.Win();
-            }
+            game.KnifeClicked(gameObject);
         }
     }
 }
