@@ -1,88 +1,106 @@
-using TMPro;
+锘縰sing TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// Connects UI buttons to gameplay actions
+/// Controls the high-level game flow
 public class ToyController : MonoBehaviour
 {
-    public Transform wand;
-    public Transform rabbit;
+    public SummonSystem summonSystem;
+    public CollectionSystem collectionSystem;
 
+    public RabbitSliderControl rabbitSlider;
     public Button collectButton;
     public TMP_Text statusText;
-    public TMP_Text countText;
 
-    public float rotateSpeed = 180f;
-    public float summonTime = 3f;
+    public Transform rabbit;
+    public float rabbitHiddenY = -0.47f;
+    public float rabbitShownY = 1.55f;
 
-    public float rabbitHiddenY = -2f;
-    public float rabbitShownY = 0f;
-
-    private bool isSummoning = false;
-    private bool canPullRabbit = false;
-
-    private float timer = 0f;
-    private int count = 0;
-
-    void Start()
+    private void Start()
     {
+        // Initialize UI and systems
+        if (collectButton != null) collectButton.interactable = false;
+
+        if (statusText != null) statusText.text = "Click Wand to Summon";
+
+        if (summonSystem != null)
+        {
+            // Let SummonSystem control rabbit visibility at start
+            summonSystem.statusText = statusText;
+            summonSystem.InitStartHidden();
+        }
+
+        if (collectionSystem != null)
+        {
+            collectionSystem.InitCount();
+        }
+
+        // Ensure rabbit starts hidden at correct Y (even if hidden)
         SetRabbitY(rabbitHiddenY);
-        collectButton.interactable = false;
-        statusText.text = "Click Wand to Summon";
-        countText.text = "Collected: 0";
     }
 
-    void Update()
+    private void Update()
     {
-        if (isSummoning)
+        if (summonSystem == null || collectButton == null) return;
+
+        // Enable collect only after summoning is finished
+        collectButton.interactable = summonSystem.CanPullRabbit();
+    }
+
+    ///// Called by the Wand button.
+    ///// Starts the 3second summoning sequence.
+    public void OnWandButtonClicked()
+    {
+        if (summonSystem == null) return;
+
+        summonSystem.StartSummon();
+
+        // During summoning, you cannot collect yet.
+        if (collectButton != null) collectButton.interactable = false;
+    }
+
+    ///// Called by the Collect button.
+    ///// Moves the held item into the collection area and resets to idle.
+    public void OnCollectButtonClicked()
+    {
+        if (summonSystem == null || collectionSystem == null) return;
+
+        // Only allow collect after summoning finished.
+        if (!summonSystem.CanPullRabbit()) return;
+
+        // Collect the held item (move it to collection area)
+        GameObject held = summonSystem.GetHeldItem();
+        collectionSystem.CollectHeldItem(held);
+
+        // Reset rabbit and summoning state
+        SetRabbitY(rabbitHiddenY);
+        summonSystem.ResetToIdle();
+
+        if (collectButton != null) collectButton.interactable = false;
+        if (statusText != null) statusText.text = "Click crystall ball to Summon";
+
+        if (rabbitSlider != null)
         {
-            timer += Time.deltaTime;
-
-            wand.Rotate(0f, 0f, rotateSpeed * Time.deltaTime);
-
-            if (timer >= summonTime)
-            {
-                isSummoning = false;
-                canPullRabbit = true;
-                collectButton.interactable = true;
-                statusText.text = "Use Slider, then Collect!";
-            }
+            rabbitSlider.ResetSlider();
         }
     }
 
-    // 按魔杖按钮调用
-    public void StartSummon()
-    {
-        if (isSummoning || canPullRabbit) return;
-
-        timer = 0f;
-        isSummoning = true;
-        statusText.text = "Summoning...";
-    }
-
-    // Collect 按钮调用
-    public void CollectItem()
-    {
-        if (!canPullRabbit) return;
-
-        count++;
-        countText.text = "Collected: " + count;
-
-        SetRabbitY(rabbitHiddenY);
-
-        canPullRabbit = false;
-        collectButton.interactable = false;
-        statusText.text = "Click Wand to Summon";
-    }
-
+    ///// Keep it public so the slider script can set rabbit Y safely.
     public void SetRabbitY(float y)
     {
+        if (rabbit == null) return;
+
         Vector3 pos = rabbit.position;
         pos.y = y;
         rabbit.position = pos;
     }
 
+    ///// Used by the slider script: player can pull rabbit only after summoning finished.
     public bool CanPullRabbit()
     {
-        return canPullRabbit;
+        if (summonSystem == null) return false;
+        return summonSystem.CanPullRabbit();
     }
 }
