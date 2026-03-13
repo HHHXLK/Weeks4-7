@@ -24,7 +24,8 @@ public class EventDrivenLara : MonoBehaviour
     public UnityEvent<float> SetupSwimTimer; //pass max timer value. Use to set value to 0, max value, hide slider
     public UnityEvent StartSwimTimer;
     public UnityEvent StopSwimTimer;
-    
+
+    public float drowningDamagePerSecond = 1f;
 
     void Start()
     {
@@ -51,6 +52,11 @@ public class EventDrivenLara : MonoBehaviour
         SetAnimation();
 
         transform.position += (Vector3)movement;
+
+        if (isSwimming)
+        {
+            TakeDamage(drowningDamagePerSecond * Time.deltaTime);
+        }
     }
 
     public void SetSwimming(bool value)
