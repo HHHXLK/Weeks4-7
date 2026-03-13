@@ -265,7 +265,6 @@ GameObject:
   m_Component:
   - component: {fileID: 90742891}
   - component: {fileID: 90742890}
-  - component: {fileID: 90742892}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -343,49 +342,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &90742892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90742889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc50742ade12f4aaf47aaac30e09bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2119050084235178518}
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8201220833175912574}
-        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
-        m_MethodName: SetSwimming
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnLeave:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8201220833175912574}
-        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
-        m_MethodName: SetSwimming
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &183164309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1427,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2063518277}
   - component: {fileID: 2063518276}
-  - component: {fileID: 2063518278}
   m_Layer: 0
   m_Name: Water (1)
   m_TagString: Untagged
@@ -1542,56 +1497,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2063518275}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.87660027, y: -3.4230003, z: 0}
-  m_LocalScale: {x: 15.593101, y: 2.486, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8766, y: -3.423, z: 0}
+  m_LocalScale: {x: 15.5931, y: 2.486, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2063518278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063518275}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92bc50742ade12f4aaf47aaac30e09bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2119050084235178518}
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8201220833175912574}
-        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
-        m_MethodName: SetSwimming
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnLeave:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8201220833175912574}
-        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
-        m_MethodName: SetSwimming
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!224 &369940791003827806
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1642,6 +1554,7 @@ GameObject:
   - component: {fileID: 8699610323487663052}
   - component: {fileID: 8427681039186996900}
   - component: {fileID: 8201220833175912574}
+  - component: {fileID: 8699610323487663053}
   m_Layer: 0
   m_Name: Event Driven Player
   m_TagString: Untagged
@@ -2430,6 +2343,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8699610323487663053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067058164206151858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1655fc43f68d7bc4281f9c6c3b325f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hazardSRs:
+  - {fileID: 90742890}
+  - {fileID: 2063518276}
+  isInHazard: 0
+  OnEnterHazard:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8201220833175912574}
+        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
+        m_MethodName: SetSwimming
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnExitHazard:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8201220833175912574}
+        m_TargetAssemblyTypeName: EventDrivenLara, Assembly-CSharp
+        m_MethodName: SetSwimming
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
